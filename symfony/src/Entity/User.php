@@ -45,7 +45,6 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->galleries = new ArrayCollection();
         $this->cities = new ArrayCollection();
     }
 
