@@ -28,12 +28,11 @@ class EditRecordForm extends AbstractType
             ->add('city', EntityType::class, [
                 'class' => City::class,
                 'query_builder' => function (CityRepository $repository) use ($user) {
-                    $queryBuilder = $repository->createQueryBuilder('qb')
+                    return $repository->createQueryBuilder('qb')
                         ->select('c')
                         ->from(City::class, 'c')
                         ->andWhere('c.user = :user')
                         ->setParameter('user', $user);
-                    return $queryBuilder;
                 }
             ])
             ->add('temperature')

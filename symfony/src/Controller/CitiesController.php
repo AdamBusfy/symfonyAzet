@@ -31,7 +31,7 @@ class CitiesController extends AbstractController
 
         if ($addCityForm->isSubmitted() && $addCityForm->isValid()) {
 
-            if ($this->addRecordToCity($addCityForm->get('name')->getData())) {
+            if ($this->addCityRecord($addCityForm->get('name')->getData())) {
                 $this->addFlash('success', 'New record created!');
             } else {
                 $this->addFlash('notSuccess', 'Record was not created!');
@@ -92,8 +92,7 @@ class CitiesController extends AbstractController
         if ($editCityForm->isSubmitted() && $editCityForm->isValid()) {
 
             if ($editCityForm->get('city')->getData() !== $oldCity) {
-                $this->addRecordToCity($editCityForm->get('city')->getData()->getName());
-                $em->remove($record);
+                $this->editCityRecord($record);
             }
 
             $this->addFlash('success', 'Record edited successfully!');
@@ -153,7 +152,7 @@ class CitiesController extends AbstractController
             $response->send();
     }
 
-    private function addRecordToCity(string $cityName) : bool {
+    private function addCityRecord(string $cityName) : bool {
 
         $cityRepository = $this->getDoctrine()
             ->getRepository(City::class);
@@ -187,6 +186,24 @@ class CitiesController extends AbstractController
             $entityManager->persist($record);
             $entityManager->flush();
 
+            return true;
+        }
+    }
+
+    private function editCityRecord (Record $record): bool
+    {
+        $url = "http://api.openweathermap.org/data/2.5/weather?q=" . $record->getCity()->getName() . "&appid=542ffd081e67f4512b705f89d2a611b2&units=metric";
+        $httpClient = HttpClient::create();
+        $httpResponse = $httpClient->request('GET', $url);
+
+        if (200 !== $httpResponse->getStatusCode()) {
+            return false;
+        } else {
+            $content = json_decode($httpResponse->getContent(), true);
+
+            $record->setTemperature(($content){'main'}{'temp'});
+            $record->setHumidity(($content){'main'}{'pressure'});
+            $record->setPressure(($content){'main'}{'humidity'});
             return true;
         }
     }
