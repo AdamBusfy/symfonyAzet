@@ -1,7 +1,5 @@
 # 🐳 Adam Busfy ZADANIE
 
-## Description
-
 ## Installation
 
 1. Clone this rep.
