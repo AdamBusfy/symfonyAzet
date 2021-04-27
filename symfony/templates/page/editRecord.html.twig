@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block title %}EditRecord{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('pageEditRecord') }}
+    {{ encore_entry_script_tags('pageEditRecord') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container" style="width: 75%">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="card bg-dark">
+                            <div class="card-header text-white">
+                                Edit record
+                            </div>
+                            <div class="card-body bg-white">
+                                {{ form_start(editForm) }}
+                                <ul class="list-group list-group-flush">
+
+                                    <li class="list-group-item">
+                                        <div class="form-group">
+                                            {{ form_row(editForm.city, {
+                                                attr: {
+                                                    class: "selectpicker form-select"
+                                                }
+                                            }) }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form_row(editForm.temperature, {
+                                                attr: {
+                                                    class: "form-control"
+                                                }
+                                            }) }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form_row(editForm.humidity, {
+                                                attr: {
+                                                    class: "form-control"
+                                                }
+                                            }) }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form_row(editForm.pressure, {
+                                                attr: {
+                                                    class: "form-control"
+                                                }
+                                            }) }}
+                                        </div>
+                                        {{ form_row(editForm.submitButton) }}
+                                    </li>
+                                </ul>
+                                {{ form_end(editForm) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

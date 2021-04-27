@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+{% block title %}Log in!{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('pageLogin') }}
+{% endblock %}
+
+{% block body %}
+    <form method="post">
+    <div class="container-fluid">
+        <div class="row no-gutter">
+
+            <div class="col">
+                <div class="login d-flex align-items-center py-5">
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-10 col-xl-7 mx-auto">
+                                <h3 class="display-4">Login!</h3>
+                                <p class="text-muted mb-4">CRUD + external API</p>
+
+                                <div class="mb-3">
+                                        <label for="inputEmail">Email</label>
+                                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+                                </div>
+                                <div class="mb-3">
+                                        <label for="inputPassword">Password</label>
+                                        <input type="password" name="password" id="inputPassword" class="form-control" required>
+                                </div>
+                                <div class="mb-2">
+                                        <input type="checkbox" id="remember_me" name="_remember_me" checked/>
+                                        <label for="remember_me">Remember me</label>
+                                </div>
+
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                                <div class="mb-3">
+                                <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Log in</button>
+
+                                </div>
+                                <div class="mb-3">
+                                    <a class="" href="{{ path('app_register') }}">Create an account.</a>
+                                </div>
+                                {% if error %}
+                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                {% endif %}
+
+                                {% if app.user %}
+                                    <div class="mb-3">
+                                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+{% endblock %}
+
+

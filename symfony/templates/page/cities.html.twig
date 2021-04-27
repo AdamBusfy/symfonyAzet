@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+{% block title %}Cities{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('pageCities') }}
+    {{ encore_entry_script_tags('pageCities') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container" style="width: 75%">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('notSuccess') %}
+            <div class="alert alert-danger">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="card bg-dark">
+                            <div class="card-header text-white">
+                                Create record
+                            </div>
+                            <div class="card-body bg-white">
+                                {{ form_start(add_city) }}
+                                <ul class="list-group list-group-flush">
+
+                                    <li class="list-group-item">
+                                        <div class="form-group">
+                                            {{ form_row(add_city.name, {
+                                                attr: {
+                                                    class: "form-control"
+                                                }
+                                            }) }}
+                                        </div>
+                                        {{ form_row(add_city.submitButton) }}
+                                    </li>
+                                </ul>
+                                {{ form_end(add_city) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <table id="cities" class="table table-light table-bordered">
+                                    <thead class="thead-dark ">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Name <i class="c-icon fas fa-signature text-white"></i></th>
+                                        <th scope="col">Records</th>
+                                        <th scope="col" style="text-align: center">Actions <i class="c-icon fas fa-tools text-white"></i></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for city in cities %}
+
+                                        <tr>
+                                        <td>{{ city.id }}</td>
+                                        <td>{{ city.name }}</td>
+                                        <td>{{ city.records|length }}</td>
+                                        <td style="text-align: center">
+
+                                            <a href="{{ path('city_records', { 'id': city.id }) }}" class="btn btn-sm btn-primary">
+                                                SHOW
+                                            </a>
+                                            <a href="#" class="btn btn-sm btn-danger delete-city" data-id="{{ city.id }}">
+                                                DELETE
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="navigation">
+                                    {{ knp_pagination_render(cities) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

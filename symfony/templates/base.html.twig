@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Weather{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+
+</head>
+<body class="c-app">
+{% block javascripts %}
+{% endblock %}
+
+{% if app.user %}
+    <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+        <div class="c-sidebar-brand d-lg-down-none">
+            <h3 class="c-sidebar-brand-full" width="118" height="46"><strong>Weather <i class="c-icon fas fa-cloud-sun-rain text-white"></i></strong></h3>
+            <i class="c-sidebar-brand-minimized fas fa-box-open" width="46" height="46"></i>
+        </div>
+        <ul class="c-sidebar-nav">
+            <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ path('cities_show') }}">
+                    <i class="c-sidebar-nav-icon fas fa-city"></i>
+                    Cities
+                </a>
+            </li>
+
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link c-sidebar-nav-link-danger" href="{{ path('app_logout') }}">
+                    <i class="c-sidebar-nav-icon fas fa-sign-out-alt"></i>
+                    <strong>Logout</strong>
+                </a>
+            </li>
+        </ul>
+        <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent"
+                data-class="c-sidebar-minimized"></button>
+    </div>
+{% endif %}
+
+<div class="c-wrapper c-fixed-components">
+    <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+        {% block tabs %}{% endblock %}
+        {% if app.user %}
+            <ul class="c-header-nav ml-auto mr-4">
+                <li class="c-header-nav-item dropdown">
+
+                    <a class="c-header-nav-link" data-toggle="dropdown" href="#"
+                       role="button">
+                        <div class="c-avatar">
+                            <i class="fas fa-user-tie fa-2x"></i>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right pt-0">
+                        <div class="dropdown-header bg-light py-2">
+                            <strong>Menu</strong>
+                        </div>
+                        <a class="dropdown-item" href="{{ path('cities_show') }}">
+                            <i class="c-icon mr-2 fas fa-user"></i>
+                            Cities</a>
+                        <div class="dropdown-header bg-light py-2">
+                            <strong>Settings</strong>
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ path('app_logout') }}">
+                            <i class="c-icon mr-2 fas fa-sign-out-alt"></i>
+                            Logout </a>
+                    </div>
+                </li>
+            </ul>
+        {% endif %}
+    </header>
+    <div class="c-body">
+        <main class="c-main">
+
+            {% block body %}
+
+            {% endblock %}
+        </main>
+        <footer class="c-footer">
+            <div><a href="#">Weather</a> &copy; 2021 pog</div>
+            <div class="ml-auto">Created by&nbsp;<a href="#">Adam Bušfy</a></div>
+        </footer>
+    </div>
+</div>
+</body>
+</html>
