@@ -22,4 +22,8 @@ Creating symfony-docker_nginx_1 ... done
 DATABASE_URL=mysql://app_user:helloworld@db:3306/app_db?serverVersion=5.7
 ```
 
-You could change the name, user and password of the database in the `env` file at the root of the project.
+5. Open new terminal and run `docker-compose exec php sh` , inside run `php bin/console make:migration` and `npm run watch`
+
+6. Run the migration with `php bin/console doctrine:migrations:migrate`
+
+7. Try it out! : http://127.0.0.1/login
