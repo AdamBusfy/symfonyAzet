@@ -22,7 +22,7 @@ DATABASE_URL=mysql://app_user:helloworld@db:3306/app_db?serverVersion=5.7
 
 5. Open new terminal and run `docker-compose exec php sh`  
 
-6. inside run`composer install` run `php bin/console make:migration` 
+6. inside run`composer install` and `php bin/console make:migration` 
 7. and also `npm install` and `npm run watch`
 
 8. Run the migration with `php bin/console doctrine:migrations:migrate`
