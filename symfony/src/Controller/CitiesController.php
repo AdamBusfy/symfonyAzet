@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\City;
 use App\Entity\Record;
 use App\Form\AddCityForm;
+use App\Form\AddRecord;
 use App\Form\EditRecordForm;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -59,6 +60,19 @@ class CitiesController extends AbstractController
     public function cityRecords(Request $request, PaginatorInterface $paginator, int $id): Response
     {
 
+        $addRecordForm = $this->createForm(AddRecord::class);
+        $addRecordForm->handleRequest($request);
+
+        if ($addRecordForm->isSubmitted() && $addRecordForm->isValid()) {
+
+            if ($this->addCityRecord($this->getDoctrine()
+                ->getRepository(City::class)->find($id)->getName())) {
+                $this->addFlash('success', 'New record created!');
+            } else {
+                $this->addFlash('notSuccess', 'Record was not created!');
+            }
+        }
+
         $pagination = $paginator->paginate(
             $this->getDoctrine()
                 ->getRepository(Record::class)->findBy(['city' => $id]),
@@ -70,6 +84,7 @@ class CitiesController extends AbstractController
             'records' => $pagination,
             'city' => $this->getDoctrine()
                 ->getRepository(City::class)->find($id)->getName(),
+            'addRecord' => $addRecordForm->createView(),
         ]);
     }
 

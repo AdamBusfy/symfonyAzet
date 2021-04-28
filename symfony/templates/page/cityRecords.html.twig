@@ -23,10 +23,21 @@
                     <div class="col">
                         <div class="card text-white bg-gradient-dark">
                             <div class="card-body">
+
+
                                 <div class="text-muted text-right mb-4">
-                                    <i class="c-icon c-icon-2xl fas fa-city"></i>
+                                    {{ form_start(addRecord) }}
+                                    {{ form_row(addRecord.submitButton) }}
+                                    {{ form_end(addRecord) }}
                                 </div>
-                                <div class="text-value-lg">{{ city }}</div>
+
+
+                                <div class="text-value-lg">
+
+                                    {{ city }}
+                                    <small class="text-muted">
+                                        <i class="c-icon c-icon-2xs fas fa-city"></i>
+                                    </small></div>
                                 <small class="text-muted text-uppercase font-weight-bold">Records: {{ records|length }}</small>
                             </div>
                         </div>
@@ -41,11 +52,15 @@
                                     <thead class="thead-dark ">
                                     <tr>
                                         <th scope="col">ID</th>
-                                        <th scope="col">City name <i class="c-icon fas fa-signature text-white"></i></th>
-                                        <th scope="col">Temperature <i class="c-icon fas fa-temperature-low text-white"></i> (°C)</th>
-                                        <th scope="col">Humidity <i class="c-icon fas fa-tint text-white"></i> </th>
-                                        <th scope="col">Pressure <i class="c-icon fas fa-compress-alt text-white"></i></th>
-                                        <th scope="col" style="text-align: center">Actions <i class="c-icon fas fa-tools text-white"></i></th>
+                                        <th scope="col">City name <i class="c-icon fas fa-signature text-white"></i>
+                                        </th>
+                                        <th scope="col">Temperature <i
+                                                    class="c-icon fas fa-temperature-low text-white"></i> (°C)
+                                        </th>
+                                        <th scope="col">Humidity <i class="c-icon fas fa-tint text-white"></i></th>
+                                        <th scope="col">Pressure <i class="c-icon fas fa-compress-alt text-white"></i>
+                                        </th>
+                                        <th scope="col">Actions <i class="c-icon fas fa-tools text-white"></i></th>
                                         <th scope="col">Timestamp</th>
                                     </tr>
                                     </thead>
@@ -57,11 +72,13 @@
                                             <td>{{ record.temperature }} </td>
                                             <td>{{ record.humidity }}</td>
                                             <td>{{ record.pressure }}</td>
-                                            <td style="text-align: center">
-                                                <a href="#" class="btn btn-sm btn-danger delete-record" data-id="{{ record.id }}">
+                                            <td>
+                                                <a href="#" class="btn btn-sm btn-danger delete-record"
+                                                   data-id="{{ record.id }}">
                                                     DELETE
                                                 </a>
-                                                <a href="{{ path('record_edit', { 'id': record.id }) }}" class="btn btn-sm btn-success">
+                                                <a href="{{ path('record_edit', { 'id': record.id }) }}"
+                                                   class="btn btn-sm btn-success">
                                                     EDIT
                                                 </a>
                                             </td>

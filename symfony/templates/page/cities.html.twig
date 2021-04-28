@@ -62,7 +62,7 @@
                                         <th scope="col">ID</th>
                                         <th scope="col">Name <i class="c-icon fas fa-signature text-white"></i></th>
                                         <th scope="col">Records</th>
-                                        <th scope="col" style="text-align: center">Actions <i class="c-icon fas fa-tools text-white"></i></th>
+                                        <th scope="col">Actions <i class="c-icon fas fa-tools text-white"></i></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -72,7 +72,7 @@
                                         <td>{{ city.id }}</td>
                                         <td>{{ city.name }}</td>
                                         <td>{{ city.records|length }}</td>
-                                        <td style="text-align: center">
+                                        <td>
 
                                             <a href="{{ path('city_records', { 'id': city.id }) }}" class="btn btn-sm btn-primary">
                                                 SHOW
