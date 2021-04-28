@@ -20,8 +20,11 @@ Creating symfony-docker_nginx_1 ... done
 DATABASE_URL=mysql://app_user:helloworld@db:3306/app_db?serverVersion=5.7
 ```
 
-5. Open new terminal and run `docker-compose exec php sh` , inside run `php bin/console make:migration` and `npm run watch`
+5. Open new terminal and run `docker-compose exec php sh`  
 
-6. Run the migration with `php bin/console doctrine:migrations:migrate`
+6. inside run`composer install` run `php bin/console make:migration` 
+7. and also `npm install` and `npm run watch`
 
-7. Try it out! : http://127.0.0.1/login
+8. Run the migration with `php bin/console doctrine:migrations:migrate`
+
+9. Try it out! : http://127.0.0.1/login
