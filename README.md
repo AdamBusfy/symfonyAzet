@@ -25,6 +25,4 @@ DATABASE_URL=mysql://app_user:helloworld@db:3306/app_db?serverVersion=5.7
 6. inside run`composer install` and `php bin/console make:migration` 
 7. and also `npm install` and `npm run watch`
 
-8. Run the migration with `php bin/console doctrine:migrations:migrate`
-
-9. Try it out! : http://127.0.0.1/login
+8. Try it out! : http://127.0.0.1/login
